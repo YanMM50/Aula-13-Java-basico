@@ -2,25 +2,48 @@ package com.example.aula.model;
 
 import jakarta.persistence.*;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "tab_cliente")
 public class Cliente {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     @Column(nullable = false)
     private String nome;
+
     @Column(nullable = false)
     private String email;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Endereco endereco;
 
     public Cliente() {
     }
 
-    public Cliente(String email, Long id, String nome) {
-        this.email = email;
+    public Cliente(UUID id, String nome, String email, Endereco endereco) {
         this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.endereco = endereco;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
@@ -32,19 +55,11 @@ public class Cliente {
         this.email = email;
     }
 
-    public Long getId() {
-        return id;
+    public Endereco getEndereco() {
+        return endereco;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 }
