@@ -21,14 +21,18 @@ public class Cliente {
     @OneToOne(cascade = CascadeType.ALL)
     private Endereco endereco;
 
+    @Enumerated(EnumType.STRING)
+    private Setor setor;
+
     public Cliente() {
     }
 
-    public Cliente(UUID id, String nome, String email, Endereco endereco) {
+    public Cliente(UUID id, String nome, String email, Endereco endereco, Setor setor) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.endereco = endereco;
+        this.setor = setor;
     }
 
     public UUID getId() {
@@ -61,5 +65,13 @@ public class Cliente {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    public Setor getSetor() {
+        return setor;
+    }
+
+    public void setSetor(Setor setor) {
+        this.setor = setor;
     }
 }
